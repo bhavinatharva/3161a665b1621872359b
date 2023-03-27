@@ -4,13 +4,18 @@ import { StyleSheet, View } from 'react-native'
 
 import { useSelector } from "react-redux";
 
-const MapViewScreen = () => {
+const MapViewScreen = ({ navigation }: any) => {
   const [listItems, setListItems] = useState([]);
-  const locationList = useSelector(state => state.app.locationList);
+  const locationList = useSelector(state => state.locationList);
 
   useEffect(() => {
     (async () => {
-      console.log('locationList', locationList)
+      const unsubscribe = navigation.addListener('focus', () => {
+        console.log('locationList', locationList)
+      });
+
+      // Return the function to unsubscribe from the event so it gets removed on unmount
+      return unsubscribe;
     })();
   }, [locationList]);
   return (

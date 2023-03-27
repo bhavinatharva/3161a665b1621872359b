@@ -1,12 +1,13 @@
 import * as React from "react";
 
 import { Provider, connect } from "react-redux";
-import { persistor, store } from "./src/redux/index";
 
 import LocationList from "./src/screens/LocationList";
 import MapViewScreen from "./src/screens/MapViewScreen";
 import { NavigationContainer } from "@react-navigation/native";
+import { RootTabParamList } from "./src/navigation/index";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import store from "./src/redux/createStore";
 
 const Tab = createBottomTabNavigator();
 

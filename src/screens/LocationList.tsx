@@ -10,7 +10,7 @@ import React from "react";
 import { doGetCurrentLocation } from "../Utils";
 import moment from "moment";
 import { postService } from "../services/index";
-import { setLocationList } from '../redux/index'
+import { setLocationList } from '../redux/reducers'
 
 export default function LocationList() {
   const [listItems, setListItems] = useState([]);
@@ -45,10 +45,11 @@ export default function LocationList() {
               },
             ]);
           }
-          setLocationList(listItems)
         });
       }
     });
+
+    setLocationList(listItems)
   };
   useEffect(() => {
     (async () => {

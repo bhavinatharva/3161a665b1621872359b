@@ -1,4 +1,4 @@
-import LocationList from "../src/screens/LocationList";
+import LocationList from "../../src/screens/LocationList";
 import React from "react";
 import renderer from "react-test-renderer";
 
