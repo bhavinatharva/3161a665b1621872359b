@@ -20,6 +20,8 @@ const initialState: States = {
 const reducers = (state = initialState, action: ActionType) => {
     console.log('action', action)
     switch (action.type) {
+        case "ADD_LOCATION":
+            return { ...state, locationList: [...state.locationList, action.value] }
         case "SET_LOCATION_LIST":
             return { ...state, locationList: action.value }
         default:
@@ -32,6 +34,13 @@ export const setLocationList = (locationList: LocationItem[]) => {
     return {
         type: "SET_LOCATION_LIST",
         value: locationList
+    };
+};
+
+export const addLocation = (location: LocationItem) => {
+    return {
+        type: "ADD_LOCATION",
+        value: location
     };
 };
 

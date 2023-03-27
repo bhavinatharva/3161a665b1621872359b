@@ -1,6 +1,8 @@
 import * as Location from "expo-location";
 
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { addLocation, setLocationList } from '../redux/reducers'
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import CurrentLocationView from "../components/CurrentLocationView";
@@ -10,9 +12,10 @@ import React from "react";
 import { doGetCurrentLocation } from "../Utils";
 import moment from "moment";
 import { postService } from "../services/index";
-import { setLocationList } from '../redux/reducers'
 
 export default function LocationList() {
+  const dispatch = useDispatch();
+
   const [listItems, setListItems] = useState([]);
   const [currentLocation, setCurrentLocation] = useState({
     location_name: "",
@@ -44,12 +47,20 @@ export default function LocationList() {
                 longitude: location.coords.longitude,
               },
             ]);
+            dispatch({
+              type: "ADD_LOCATION", value: {
+                location_name: json,
+                time: moment().format("DD/MM/YYYY,HH:mm:ss a"),
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+              }
+            })
           }
         });
       }
     });
 
-    setLocationList(listItems)
+
   };
   useEffect(() => {
     (async () => {
